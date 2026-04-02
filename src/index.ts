@@ -114,3 +114,10 @@ app.delete('/notes/:id', async (req, res) => {
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 ship-e2e-test running on port ${PORT}`)
 })
+
+import { VERSION, BUILD_TIME } from './version'
+// Re-export version in root
+const origRoot = app.get('/')
+app.get('/version', (_req: any, res: any) => {
+  res.json({ version: VERSION, buildTime: BUILD_TIME })
+})
